@@ -40,7 +40,7 @@ class User(AbstractUser):
         blank=True,
     )
     last_name = models.CharField(
-        "Фамилия",
+        'Фамилия',
         max_length=150,
         blank=True
     )

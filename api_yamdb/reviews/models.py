@@ -9,13 +9,13 @@ class Category(models.Model):
     name = models.CharField(
         blank=False,
         max_length=256,
-        verbose_name="Название категории",
+        verbose_name='Название категории',
         unique=True,
     )
     slug = models.SlugField(
         blank=False,
         max_length=50,
-        verbose_name="Slug категории",
+        verbose_name='Slug категории',
         unique=True,
     )
 
@@ -32,13 +32,13 @@ class Genre(models.Model):
     name = models.CharField(
         blank=False,
         max_length=256,
-        verbose_name="Название жанра",
+        verbose_name='Название жанра',
         unique=True,
     )
     slug = models.SlugField(
         blank=False,
         max_length=50,
-        verbose_name="Slug жанра",
+        verbose_name='Slug жанра',
         unique=True,
     )
 
@@ -57,27 +57,27 @@ class Title(models.Model):
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
-        related_name="titles",
-        verbose_name="Slug категории",
+        related_name='titles',
+        verbose_name='Slug категории',
     )
     description = models.TextField(
         blank=True,
-        verbose_name="Описание",
+        verbose_name='Описание',
     )
     genre = models.ManyToManyField(
         Genre,
         blank=False,
-        through="TitleGenre",
-        verbose_name="Slug жанра",
+        through='TitleGenre',
+        verbose_name='Slug жанра',
     )
     name = models.CharField(
         blank=False,
         max_length=256,
-        verbose_name="Название",
+        verbose_name='Название',
     )
     year = models.IntegerField(
         blank=False,
-        verbose_name="Год выпуска",
+        verbose_name='Год выпуска',
         validators=[validate_year, ]
     )
 
