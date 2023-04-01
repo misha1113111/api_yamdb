@@ -1,17 +1,24 @@
-from rest_framework import mixins, viewsets
-from .serializer import (CategorySerializer,GenreSerializer)
+from rest_framework import mixins, viewsets, generics
+from .serializers import (CategorySerializer,GenreSerializer,
+                          ReviewSerializer,CommentSerializer, 
+                          SignUpSerializer, UserSerializer, 
+                          TokenSerializer)
 from reviews.models import Category, Genre, Title
 from django.db.models import Avg
+from users.models import User
 
 
-class SignUpView():
-    pass
+class SignUpView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = SignUpSerializer
 
-class TokenView():
-    pass
+class TokenView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = TokenSerializer
 
-class UserViewSet():
-    pass
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class CategoryViewSet(mixins.CreateModelMixin,
                       mixins.ListModelMixin,
@@ -33,7 +40,9 @@ class TitleViewSet(viewsets.ModelViewSet):
     
 
 class ReviewViewSet():
-    pass
+    serializer_class = ReviewSerializer
+    
 
 class CommentViewSet():
-    pass
+    serializer_class = CommentSerializer
+    

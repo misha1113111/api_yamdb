@@ -43,4 +43,8 @@ class IsUser(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.user.is_authenticated:
             return True
+<<<<<<< HEAD
         return False
+=======
+        return False
+>>>>>>> c5ec2f3 (запуск успешный)
