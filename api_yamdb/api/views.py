@@ -1,7 +1,7 @@
 from rest_framework import mixins, viewsets, generics
-from .serializers import (CategorySerializer,GenreSerializer,
-                          ReviewSerializer,CommentSerializer, 
-                          SignUpSerializer, UserSerializer, 
+from .serializers import (CategorySerializer, GenreSerializer,
+                          ReviewSerializer, CommentSerializer,
+                          SignUpSerializer, UserSerializer,
                           TokenSerializer)
 from reviews.models import Category, Genre, Title
 from django.db.models import Avg
@@ -12,13 +12,16 @@ class SignUpView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = SignUpSerializer
 
+
 class TokenView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = TokenSerializer
 
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
 
 class CategoryViewSet(mixins.CreateModelMixin,
                       mixins.ListModelMixin,
@@ -27,12 +30,14 @@ class CategoryViewSet(mixins.CreateModelMixin,
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+
 class GenreViewSet(mixins.CreateModelMixin,
                    mixins.ListModelMixin,
                    mixins.DestroyModelMixin,
                    viewsets.GenericViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
+
 
 class TitleViewSet(viewsets.ModelViewSet):
     queryset = Title.objects.annotate(
