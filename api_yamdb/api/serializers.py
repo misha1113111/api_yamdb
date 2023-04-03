@@ -13,20 +13,25 @@ class SignUpSerializer(serializers.Serializer):
     )
     email = serializers.EmailField(required=True, max_length=254)
 
+    def validate(self, data):
+        if User.objects.filter(username=data['username'],
+                               email=data['email']).exists():
+            return data
+        if (User.objects.filter(username=data['username']).exists()
+                or User.objects.filter(email=data['email']).exists()):
+            raise serializers.ValidationError(
+                'Пользователь с такими данными уже существует!'
+            )
+        return data
+
 
 class TokenSerializer(serializers.Serializer):
     username = serializers.CharField(
         required=True,
         max_length=150,
+        validators=[validate_username, ]
     )
     confirmation_code = serializers.CharField(required=True)
-
-    class Meta:
-        model = User
-        fields = (
-            'username',
-            'confirmation_code',
-        )
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -65,14 +70,14 @@ class UserMeSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('name', 'slug')
+        exclude = ['id']
         lookup_field = 'slug'
 
 
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
-        fields = ('name', 'slug')
+        exclude = ['id']
         lookup_field = 'slug'
 
 
@@ -99,10 +104,10 @@ class TitleListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Title
-        fields = (
+        fields = [
             'id', 'name', 'year', 'rating',
             'description', 'genre', 'category'
-        )
+        ]
 
 
 class ReviewSerializer(serializers.ModelSerializer):
