@@ -1,4 +1,6 @@
-from rest_framework import mixins, viewsets, generics
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import mixins, viewsets, generics, filters
+from .filters import TitleFilter
 from .serializers import (CategorySerializer, GenreSerializer,
                           ReviewSerializer, CommentSerializer,
                           SignUpSerializer, UserSerializer,
@@ -31,6 +33,8 @@ class CategoryViewSet(mixins.CreateModelMixin,
                       viewsets.GenericViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name',)
 
 
 class GenreViewSet(mixins.CreateModelMixin,
@@ -39,11 +43,15 @@ class GenreViewSet(mixins.CreateModelMixin,
                    viewsets.GenericViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name',)
 
 
 class TitleViewSet(viewsets.ModelViewSet):
     queryset = Title.objects.annotate(
         rating=Avg('reviews__score')).order_by('-id')
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = TitleFilter
 
     def get_serializer_class(self):
         if self.action in ('list', 'retrieve'):
