@@ -18,7 +18,7 @@ class SignUpSerializer(serializers.Serializer):
                                email=data['email']).exists():
             return data
         if (User.objects.filter(username=data['username']).exists()
-                or User.objects.filter(email=data['email']).exists()):
+                or User.objects.filter(email__iexact=data['email']).exists()):
             raise serializers.ValidationError(
                 'Пользователь с такими данными уже существует!'
             )
@@ -127,7 +127,7 @@ class ReviewSerializer(serializers.ModelSerializer):
         if self.context['request'].method == 'POST':
             user = self.context['request'].user
             title_id = self.context['view'].kwargs.get('title_id')
-            if Review.objects.filter(author=user, title_id=title_id).exists():
+            if Review.objects.filter(author=user, title__id=title_id).exists():
                 raise serializers.ValidationError('Вы уже оставили отзыв.')
         return data
 
