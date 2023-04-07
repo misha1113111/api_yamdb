@@ -45,5 +45,9 @@ class User(AbstractUser):
         blank=True
     )
 
+    @property
+    def is_admin(self):
+        return self.role == self.RoleChoices.ADMIN
+
     def __str__(self):
         return self.username

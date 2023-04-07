@@ -7,13 +7,11 @@ from users.models import User
 
 class Category(models.Model):
     name = models.CharField(
-        blank=False,
         max_length=256,
         verbose_name='Название категории',
         unique=True,
     )
     slug = models.SlugField(
-        blank=False,
         max_length=50,
         verbose_name='Slug категории',
         unique=True,
@@ -30,13 +28,11 @@ class Category(models.Model):
 
 class Genre(models.Model):
     name = models.CharField(
-        blank=False,
         max_length=256,
         verbose_name='Название жанра',
         unique=True,
     )
     slug = models.SlugField(
-        blank=False,
         max_length=50,
         verbose_name='Slug жанра',
         unique=True,
@@ -66,17 +62,15 @@ class Title(models.Model):
     )
     genre = models.ManyToManyField(
         Genre,
-        blank=False,
         through='TitleGenre',
         verbose_name='Slug жанра',
     )
     name = models.CharField(
-        blank=False,
         max_length=256,
         verbose_name='Название',
     )
-    year = models.IntegerField(
-        blank=False,
+    year = models.PositiveIntegerField(
+        db_index=True,
         verbose_name='Год выпуска',
         validators=[validate_year, ]
     )

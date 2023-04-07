@@ -1,39 +1,49 @@
 # Проект YaMDB
-### Описание
+## Описание:
 Проект YaMDB собирает отзывы пользователей на произведения (книги, фильмы, музыку).Произведения здесь не хранятся. Незарегистрированные пользователи могут просматривать информацию о произведениях, жанрах и категориях произведений, а также читать отзывы и комментарии.
 Зарегистрированные пользователи могут оставлять отзывы и комментарии на произведения, и выставлять оценку от 1 до 10. Добавлять произведения, жанры и категории есть только у администраторов проекта. 
+Полная документация к API находится по эндпоинту /redoc
+
+### Стек технологий использованный в проекте:
+
+* Python
+* Django
+* Django REST Framework
+* REST API
+* SQLite
+* Аутентификация по JWT-токену
 
 
+## Как запустить проект:
 
-### Как запустить проект:
+#### Клонировать репозиторий и перейти в него в командной строке:
+* https://github.com/misha1113111/api_yamdb
 
-Клонировать репозиторий и перейти в него в командной строке:
-https://github.com/misha1113111/api_yamdb
-
-Cоздать и активировать виртуальное окружение:
+##### Cоздать и активировать виртуальное окружение:
+* Если у вас Linux/macOS
 python3 -m venv venv
-windows:
+* windows:
 python -m venv venv
 * Если у вас Linux/macOS
 source venv/bin/activate
-Если у вас windows
+* Если у вас windows
 source venv/scripts/activate
-python3 -m pip install --upgrade pip
-Установить зависимости из файла requirements.txt:
-pip install -r requirements.txt
-Выполнить миграции:
-python3 manage.py migrate
-Запустить проект:
-python3 manage.py runserver
+##### Установить зависимости из файла requirements.txt:
+* python3 -m pip install --upgrade pip
+* pip install -r requirements.txt
+##### Выполнить миграции:
+* python3 manage.py migrate
+##### Запустить проект:
+* python3 manage.py runserver
 
-Можно загружать данные из csv.фаилов.
+### Можно загружать данные из csv.фаилов:
 Для загрузки данных из определённого файла для конкретной модели, выполните команду:
-python3 manage.py load_data_csv --path <путь к csv-файлу> --model_name <имя модели> --app_name <название приложения>
+* python3 manage.py load_data_csv --path <путь к csv-файлу> --model_name <имя модели> --app_name <название приложения>
 
-Например:
-python3 manage.py load_data_csv --path static/data/users.csv --model_name user --app_name users
+### Например:
+* python3 manage.py load_data_csv --path static/data/users.csv --model_name user --app_name users
 
-Данные из файлов необходимо загружать в следующем порядке:
+### Данные из файлов необходимо загружать в следующем порядке:
 * users.csv
 * genre.csv
 * category.csv
@@ -42,7 +52,12 @@ python3 manage.py load_data_csv --path static/data/users.csv --model_name user -
 * review.csv
 * comments.csv
 
-### Авторы проекта
+### Документация будет доступна после запуска проекта по адресу /redoc/.
+
+### Авторы проекта:
+
 **Дмитрий Патрушев.** Регистрация и авторизация, управление пользователями, права доступа.
+
 **Чигин Михаил.** Тимлид.Произведения, категории, жанры, импорт csv-файлов.
+
 **Наталья Куделина.** Отзывы, комментарии, рейтинг произведений.
