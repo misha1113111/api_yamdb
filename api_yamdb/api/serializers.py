@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from reviews.models import Category, Comment, Genre, Review, Title
 from rest_framework.validators import UniqueValidator
+
+from reviews.models import Category, Comment, Genre, Review, Title
 from users.models import User
 from users.validator import validate_username
 

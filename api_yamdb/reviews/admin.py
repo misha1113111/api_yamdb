@@ -3,7 +3,7 @@ from import_export import resources
 from import_export.fields import Field
 from import_export.admin import ImportExportModelAdmin
 
-from reviews.models import Category, Genre, Title, TitleGenre, Review, Comment
+from reviews.models import Category, Genre, Comment, Review, Title, TitleGenre
 
 
 class CategoryResource(resources.ModelResource):

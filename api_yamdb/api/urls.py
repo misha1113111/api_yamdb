@@ -17,8 +17,12 @@ router.register(r'titles/(?P<title_id>\d+)/reviews'
                 CommentViewSet, basename='comments')
 router.register(r'users', UserViewSet, basename='users')
 
-urlpatterns = [
-    path('auth/signup/', SignUpView.as_view()),
+jwt_patterns = [
     path('auth/token/', TokenView.as_view()),
-    path("", include(router.urls)),
+    path('auth/signup/', SignUpView.as_view()),
+]
+
+urlpatterns = [
+    path('', include(jwt_patterns)),
+    path('', include(router.urls)),
 ]
