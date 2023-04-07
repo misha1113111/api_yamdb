@@ -33,7 +33,7 @@ class SignUpView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         username = serializer.data.get('username')
         email = serializer.data.get('email')
-        user, created = User.objects.get_or_create(
+        user, _ = User.objects.get_or_create(
             username=username,
             email=email
         )
